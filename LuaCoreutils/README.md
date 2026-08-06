@@ -1,4 +1,4 @@
-# Luutils
+# <p align=center> Luutils <p align=center> 
 Luutils (or Luacoreutils if youre a bore >:[) is my attempt at the implimentation of GNU Coreutils in Lua. Why? 🤷 idk funsies
 
 ## List of Utils:
