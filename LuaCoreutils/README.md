@@ -1,5 +1,5 @@
-# <p align=center> Luutils <p align=center> 
-Luutils (or Luacoreutils if youre a bore >:[) is my attempt at the implimentation of GNU Coreutils in Lua. Why? 🤷 idk funsies
+# <p align=center> Lutils <p align=center> <img src="/LuaCoreutils/Lutils.png" alt="logo" width="150" />
+Lutils (or Luacoreutils if youre a bore >:[) is my attempt at the implimentation of GNU Coreutils in Lua. Why? 🤷 idk funsies
 
 ## List of Utils:
 
