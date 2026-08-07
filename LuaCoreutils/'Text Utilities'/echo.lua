@@ -2,32 +2,49 @@
 
 --[[ Prefuncs ]]
 
-function endline()
-	if debugMode == true then print("found a endliner") end
-	allArgs = string.gsub(allArgs, [[\n]], "\n")
-	if debugMode == true then print(allArgs) end
+function runCommand(command)
+	local handle = io.popen(command)
+	local output = handle:read("*a")
+	handle:close()
+	print(output)  
 end
 
---[[
-function DebugMode(func)
-	if debugMode == true then
-		func
-	end
+--[[ BORDER TO KEEP PROGRAM PREFUNCS FROM REUSED PREFUNCS ]]
+
+function endline()
+	if debugMode == true then print("found a endliner") end
+	string = string.gsub(string, [[\n]], "\n")
+	if debugMode == true then print("", string) end
 end
-]]
+
+function alertBEL()
+	if debugMode == true then print("found an alert (BEL)") end
+	string = string.gsub(string, [[\a]], " \b")
+	os.execute("mpv ./pop.m4a > /dev/null 2>&1") --[[ yes ik jank & shet asf but also im too lazy to try & use a C API on lua if thats even doable fr ]]
+	if debugMode == true then print(string) end
+end
+
 
 --[[ Prefuncs ]]
 
 --[[ Variables ]]
 
- allArgs = table.concat(arg, " ")
- debugMode = true
+ string = table.concat(arg, " ")
+ debugMode = false
 
 --[[ Variables ]]
 
-if debugMode == true then print(allArgs) end
+if debugMode == true then print("the original string was: " .. string) end
 
-if string.match(allArgs, [[\n]]) then
-	endline()
+if string.match(string, "-E") ~= false then
+	string = string.gsub(string, "-e", " \b") 
+	if string.match(string, [[\n]]) then
+		endline()
+	end
+
+	if string.match(string, [[\a]]) then
+		alertBEL()
+	end
+
 end
-
+print(string)
