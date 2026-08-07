@@ -3,7 +3,9 @@
 --[[ Prefuncs ]]
 
 function endline()
-		if debugMode == true then print("found a endliner") end
+	if debugMode == true then print("found a endliner") end
+	allArgs = string.gsub(allArgs, [[\n]], "\n")
+	if debugMode == true then print(allArgs) end
 end
 
 --[[
@@ -23,8 +25,9 @@ end
 
 --[[ Variables ]]
 
+if debugMode == true then print(allArgs) end
+
 if string.match(allArgs, [[\n]]) then
 	endline()
-else
-print(allArgs)
 end
+
