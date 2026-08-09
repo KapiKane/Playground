@@ -70,8 +70,7 @@ function escape()
 	if debugMode == true then print(stringEnding) end
 
 	string = stringBeginning .. stringEnding
-
---	if debugMode == true then print(string) end
+	if debugMode == true then print("combined stringBeginning && stringEnding is:", string) end
 
 	--[[
 		❯ echo "hello\eworld" => helloorld
@@ -81,6 +80,28 @@ function escape()
 		3. remove the \e
 		4. profit!
 	]]
+end
+
+function formFeed()
+	local _,wordCount = string:gsub("%S+","")
+	print(wordCount)
+
+	--[[
+		❯ echo "hello\fworld\fprogrammed\fto\fwork"           
+		hello
+     		world
+           	 	 programmed
+                		    to
+                    		  work
+	  ---------
+	1. find where \f is
+	2. how many characters it is to the left of that \f
+	3. replace \f with \n
+	4. ad the amount of characters with spaces to the left of the word
+	5. profit
+	]]
+	
+
 end
 
 function endline()
@@ -135,6 +156,10 @@ if string.match(string, "-E") ~= true then
 
 	if string.match(string, [[\e]]) then
 		escape() --[[ ESCAPEEEEE, LEAVE WHILE YOU STILL CAN BROTHER. XD  ]]
+	end
+
+	if string.match(string, [[\f]]) then
+		formFeed()
 	end
 
 	if string.match(string, [[\n]]) then
