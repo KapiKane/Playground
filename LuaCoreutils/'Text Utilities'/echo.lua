@@ -59,6 +59,28 @@ end
 
 function escape()
 	if debug == true then print("found an escapeline") end
+
+	local startIndex, endIndex = string.find(string, "\\e", 1, true)
+	if debugMode == true then print("\\e is at: " .. startIndex .. " & ends at: " .. endIndex) end
+	
+	local stringBeginning = string.sub(string, 1, startIndex - 1)
+	if debugMode == true then print(stringBeginning) end
+
+	local stringEnding = string.sub(string, endIndex + 2)
+	if debugMode == true then print(stringEnding) end
+
+	string = stringBeginning .. stringEnding
+
+--	if debugMode == true then print(string) end
+
+	--[[
+		❯ echo "hello\eworld" => helloorld
+
+		1. find where "\e" is, specificallly the e is; DONE
+		2. remove the character after the e
+		3. remove the \e
+		4. profit!
+	]]
 end
 
 function endline()
@@ -78,7 +100,7 @@ end
 --[[ Variables ]]
 
  string = table.concat(arg, " ")
- debugMode = true
+ debugMode = false
 
 --[[ Variables ]]
 
