@@ -83,22 +83,18 @@ function escape()
 end
 
 function formFeed()
-	local _,wordCount = string:gsub("%S+","")
-	print(wordCount)
+	if debug == true then print("found a formFeed") end
 
+	local startIndex, endIndex = string.find(string, "\\f", 1, true)
+	if debugMode == true then print("\\e is at: " .. startIndex .. " & ends at: " .. endIndex) end	
+	local stringLeftSep = string.sub(string, 1, endIndex - 2)
+	if debugMode == true then print("stringLeftSep is: " .. stringLeftSep) end
+	
 	--[[
-		❯ echo "hello\fworld\fprogrammed\fto\fwork"           
+		❯ echo "hello\fworld"           
 		hello
-     		world
-           	 	 programmed
-                		    to
-                    		  work
-	  ---------
-	1. find where \f is
-	2. how many characters it is to the left of that \f
-	3. replace \f with \n
-	4. ad the amount of characters with spaces to the left of the word
-	5. profit
+     	     world
+	WIP, SKIPPED UNTIL HAVE AN IDEA OF HOW TO DO IT
 	]]
 	
 
@@ -116,12 +112,24 @@ function endline()
 	if debugMode == true then print("Endliner produced: " .. string) end
 end
 
+function carriageReturn()
+	if debugMode == true then print("found carriageReturn") end
+	local startIndex, endIndex = string.find(string, "\\r", 1, true)
+
+	local stringLeft = string.sub(string, 1, startIndex - 1)
+	local stringRight = string.sub(string, endIndex + 1)
+	--[[
+	❯ echo "hellogs\rke"
+	kellogs
+	]]
+end
+
 --[[ Prefuncs ]]
 
 --[[ Variables ]]
 
  string = table.concat(arg, " ")
- debugMode = false
+ debugMode = true
 
 --[[ Variables ]]
 
@@ -139,7 +147,7 @@ if string.match(string, "-E") ~= true then
 	if debugMode == true then print("string is now: ", string) end
 
 	if string.match(string, [[\\]]) then
-		backslash()
+		backSlash()
 	end
 
 	if string.match(string, [[\a]]) then
@@ -147,7 +155,7 @@ if string.match(string, "-E") ~= true then
 	end
 
 	if string.match(string, [[\b]]) then
-		backspace()
+		backSpace()
 	end
 
 	if string.match(string, [[\c]]) then
@@ -164,6 +172,10 @@ if string.match(string, "-E") ~= true then
 
 	if string.match(string, [[\n]]) then
 		endline()
+	end
+
+	if string.match(string, [[\r]]) then
+		carriageReturn()
 	end
 
 end
