@@ -26,6 +26,32 @@ io::stdin()
 		- & = reference; pointer, gives adress of a variable so you dont copy the mem
 		- mut = just tells the reference/pointer that the variable is mutatable
 	- guess = where to store variable
-- .expect("Failed to read line"); = Result; a enum(eration)
+- .expect("Failed to read line"); = Result; a enum(eration) with varients:
+	- Ok: Sucessful, hands value to variable
+	- Err: Failed, prints line inside
 - Datatype: enum/enumeration = type that can be in various states/variants; compare modalism
+- probably use .expect() to handle Errs so the program dont crash, but youll get this warning:
+`
+$ cargo build
+   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
+warning: unused `Result` that must be used
+  --> src/main.rs:10:5
+   |
+10 |     io::stdin().read_line(&mut guess);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+   = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+   |
+10 |     let _ = io::stdin().read_line(&mut guess);
+   |     +++++++
+
+warning: `guessing_game` (bin "guessing_game") generated 1 warning
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.59s
+`
+
+`
+println!("You guess: {guess}");
+`
 
